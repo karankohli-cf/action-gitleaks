@@ -1,0 +1,21 @@
+[
+ {
+  "Description": "AWS",
+  "StartLine": 2,
+  "EndLine": 2,
+  "StartColumn": 7,
+  "EndColumn": 26,
+  "Match": "AKIARJFBAG3EGHFG2FPN",
+  "Secret": "AKIARJFBAG3EGHFG2FPN",
+  "File": "testdata/secret.txt",
+  "Commit": "",
+  "Entropy": 3.608695,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": "",
+  "Tags": [],
+  "RuleID": "aws-access-token",
+  "Fingerprint": "testdata/secret.txt:aws-access-token:2"
+ }
+]

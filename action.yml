@@ -1,0 +1,95 @@
+name: "Run GITLEAKS with reviewdog"
+description: "🐶 Run GITLEAKS with reviewdog on pull requests to enforce security best practices"
+author: "vlaaaaaaad (reviewdog)"
+
+inputs:
+  github_token:
+    description: "GITHUB_TOKEN"
+    required: true
+    default: "${{ github.token }}"
+  working_directory:
+    description: |
+      Directory to run the action on, from the repo root.
+      Default is . ( root of the repository)
+    default: "."
+    required: false
+  level:
+    description: "Report level for reviewdog [info,warning,error]"
+    default: "error"
+    required: false
+  reporter:
+    description: |
+      Reporter of reviewdog command [github-pr-check,github-pr-review].
+      Default is github-pr-check.
+    default: "github-pr-check"
+    required: false
+  filter_mode:
+    description: |
+      Filtering for the reviewdog command [added,diff_context,file,nofilter].
+      Default is added.
+    default: "added"
+    required: false
+  fail_on_error:
+    description: |
+      Exit code for reviewdog when errors are found [true,false]
+      Default is `false`.
+    default: "false"
+    required: false
+  flags:
+    description: "Additional reviewdog flags"
+    default: ""
+    required: false
+  gitleaks_version:
+    description: |
+      The version of GITLEAKS to install.
+      Default is latest.
+    default: "latest"
+    required: false
+  gitleaks_flags:
+    description: |
+      List of arguments to send to gitleaks
+      For the output to be parsable by reviewdog --format=checkstyle is enforced
+      Default is blank.
+    default: ""
+    required: false
+  gitleaks_scan_path:
+    description: |
+      The path of the files or directory to run the scan on.
+      Default is .
+    default: "."
+    required: false
+
+outputs:
+  gitleaks-return-code:
+    description: "gitleaks command return code"
+    value: ${{ steps.gitleaks.outputs.gitleaks-return-code }}
+  reviewdog-return-code:
+    description: "reviewdog command return code"
+    value: ${{ steps.gitleaks.outputs.reviewdog-return-code }}
+
+runs:
+  using: "composite"
+  steps:
+    - run: $GITHUB_ACTION_PATH/script.sh
+      id: gitleaks
+      shell: bash
+      env:
+        # We may want to allow specifying reviewdog version as
+        # action's input, but let's start with hard coded latest stable version for reviewdog
+        REVIEWDOG_VERSION: v0.14.1
+        # INPUT_<VARIABLE_NAME> is not available in Composite run steps
+        # https://github.community/t/input-variable-name-is-not-available-in-composite-run-steps/127611
+        INPUT_GITHUB_TOKEN: ${{ inputs.github_token }}
+        INPUT_WORKING_DIRECTORY: ${{ inputs.working_directory }}
+        INPUT_LEVEL: ${{ inputs.level }}
+        INPUT_REPORTER: ${{ inputs.reporter }}
+        INPUT_FILTER_MODE: ${{ inputs.filter_mode }}
+        INPUT_FAIL_ON_ERROR: ${{ inputs.fail_on_error }}
+        INPUT_FLAGS: ${{ inputs.flags }}
+        INPUT_GITLEAKS_VERSION: ${{ inputs.gitleaks_version }}
+        INPUT_GITLEAKS_FLAGS: ${{ inputs.gitleaks_flags }}
+        INPUT_GITLEAKS_SCAN_PATH: ${{ inputs.gitleaks_scan_path }}
+
+branding:
+  icon: "edit"
+  color: "gray-dark"
