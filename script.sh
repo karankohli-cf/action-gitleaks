@@ -42,6 +42,7 @@ test ! -d "${GITLEAKS_PATH}" && install -d "${GITLEAKS_PATH}"
 
 if [[ "${INPUT_GITLEAKS_VERSION}" = "latest" ]]; then
     gitleaks_version=$(curl --silent -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${INPUT_GITHUB_TOKEN}" https://api.github.com/repos/zricethezav/gitleaks/releases/latest | jq -r .tag_name)
+    gitleaks_version="${gitleaks_version:1}" #remove v from v8.15.1
 else
     gitleaks_version=${INPUT_GITLEAKS_VERSION}
 fi
