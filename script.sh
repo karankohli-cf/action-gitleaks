@@ -23,8 +23,8 @@ esac
 
 unameArch="$(uname -m)"
 case "${unameArch}" in
-    x86*)      arch=arm64;;
-    *)         echo "Unsupported architecture: ${unameArch}. arm64 is supported by gitleaks" && exit 1
+    x86*)      arch=armv7;;
+    *)         echo "Unsupported architecture: ${unameArch}. armv7 is supported by gitleaks" && exit 1
 esac
 
 TEMP_PATH="$(mktemp -d)"
