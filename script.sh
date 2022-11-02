@@ -56,7 +56,8 @@ fi
 
 curl --silent --show-error --fail \
 --location "${url}" \
---output "${binary}"
+--output gitleaks.tar.gz
+tar -xvf gitleaks.tar.gz
 install gitleaks "${GITLEAKS_PATH}"
 echo '::endgroup::'
 
