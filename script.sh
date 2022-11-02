@@ -53,11 +53,10 @@ if [[ "${os}" = "windows" ]]; then
     url+=".exe"
     binary+=".exe"
 fi
-
 curl --silent --show-error --fail \
 --location "${url}" \
 --output gitleaks.tar.gz
-tar -xvf gitleaks.tar.gz
+tar -xvzf gitleaks.tar.gz
 install gitleaks "${GITLEAKS_PATH}"
 echo '::endgroup::'
 
