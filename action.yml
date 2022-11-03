@@ -40,8 +40,8 @@ inputs:
     default: ""
     required: false
   report_url:
-    description: "URL to report false positive in comment"
-    default: ""
+    description: "URL to report false positives"
+    default: "https://github.com/zricethezav/gitleaks/issues/new?assignees=&labels=bug&template=bug_report.md&title="
     required: false
   gitleaks_version:
     description: |
