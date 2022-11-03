@@ -120,8 +120,10 @@ jobs:
           filter_mode: nofilter # Check all files, not just the diff
           fail_on_error: true # Fail action if errors are found
           flags: -tee # Add debug flag to reviewdog
+          report_url: "" # URL to report false positivess
           gitleaks_flags: "" # Optional
           gitleaks_path: "./assets" #optional
+          gitleaks_config: "zricethezav/gitleaks/contents/config/gitleaks.toml" #optional
 ```
 
 ## Development

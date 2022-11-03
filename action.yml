@@ -39,6 +39,10 @@ inputs:
     description: "Additional reviewdog flags"
     default: ""
     required: false
+  report_url:
+    description: "URL to report false positive in comment"
+    default: ""
+    required: false
   gitleaks_version:
     description: |
       The version of GITLEAKS to install.
@@ -51,6 +55,12 @@ inputs:
       For the output to be parsable by reviewdog --format=checkstyle is enforced
       Default is blank.
     default: ""
+    required: false
+  gitleaks_config:
+    description: |
+      The path of the config for gitleaks.
+      Default is .
+    default: "zricethezav/gitleaks/contents/config/gitleaks.toml"
     required: false
   gitleaks_scan_path:
     description: |
@@ -86,9 +96,11 @@ runs:
         INPUT_FILTER_MODE: ${{ inputs.filter_mode }}
         INPUT_FAIL_ON_ERROR: ${{ inputs.fail_on_error }}
         INPUT_FLAGS: ${{ inputs.flags }}
+        INPUT_REPORT_URL: ${{ inputs.report_url }}
         INPUT_GITLEAKS_VERSION: ${{ inputs.gitleaks_version }}
         INPUT_GITLEAKS_FLAGS: ${{ inputs.gitleaks_flags }}
         INPUT_GITLEAKS_SCAN_PATH: ${{ inputs.gitleaks_scan_path }}
+        INPUT_GITLEAKS_CONFIG: ${{ inputs.gitleaks_config }}
 
 branding:
   icon: "edit"
