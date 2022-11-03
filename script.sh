@@ -78,7 +78,7 @@ export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 set +Eeuo pipefail
 
 # shellcheck disable=SC2086
-"${GITLEAKS_PATH}/gitleaks" detect --config gitleaks_config.toml --source=${INPUT_GITLEAKS_SCAN_PATH} --log-opts='^origin/$DEFAULT_BRANCH ${{ github.EVENT.PULL_REQUEST.HEAD.SHA }}'" --report-format=json --report-path=gitleaks.json ${INPUT_GITLEAKS_FLAGS:-} || ret=$?
+"${GITLEAKS_PATH}/gitleaks" detect --config gitleaks_config.toml --source=${INPUT_GITLEAKS_SCAN_PATH} --report-format=json --report-path=gitleaks.json ${INPUT_GITLEAKS_FLAGS:-} || ret=$?
 
 jq -r -f --arg url ${INPUT_REPORT_URL} "${GITHUB_ACTION_PATH}/to-rdjson.jq" gitleaks.json \
 |  "${REVIEWDOG_PATH}/reviewdog" -f=rdjson \
