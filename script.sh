@@ -63,7 +63,7 @@ echo '::endgroup::'
 echo "::group:: Fetching gitleaks config"
 curl -H "Accept: application/vnd.github.v3.raw" \
 -H "Authorization: Bearer ${INPUT_GITHUB_TOKEN}" \
--L "https://api.github.com/repos/${ INPUT_GITLEAKS_CONFIG }" \
+-L "https://api.github.com/repos/${INPUT_GITLEAKS_CONFIG}" \
 >> gitleaks_config.toml
 echo '::endgroup::'
 
