@@ -41,7 +41,7 @@ inputs:
     required: false
   report_url:
     description: "URL to report false positives"
-    default: "https://github.com/zricethezav/gitleaks/issues/new?assignees=&labels=bug&template=bug_report.md&title="
+    default: "https://github.com/zricethezav/gitleaks/issues/new?assignees=&labels=bug&template=bug_report.md&title=False%20positive%20in%20Gitleaks"
     required: false
   gitleaks_version:
     description: |
