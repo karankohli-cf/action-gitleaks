@@ -77,7 +77,7 @@ export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 # Allow failures now, as reviewdog handles them
 set +Eeuo pipefail
 
-CHECKRUN_URL=$($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)
+CHECKRUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 
 # shellcheck disable=SC2086
 "${GITLEAKS_PATH}/gitleaks" detect --config gitleaks_config.toml --source=${INPUT_GITLEAKS_SCAN_PATH} --report-format=json --report-path=gitleaks.json ${INPUT_GITLEAKS_FLAGS:-} || ret=$?
